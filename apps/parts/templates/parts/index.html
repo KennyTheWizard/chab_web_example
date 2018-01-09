@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% load static %}
+    <script src="{% static 'parts/js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'parts/js/jstree.min.js' %}"></script>
+    <script src="{% static 'parts/js/partsajax.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'parts/css/style.min.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title>Edit Part Library</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div id="row">
+            <div class="col-sm-4">
+                <div id='inputForm' class="panel panel-default">
+                    <div id='formTitle' class="panel-body">
+                        <h1>Create Part Form</h1>
+                    </div>
+                    <div class="panel-body">
+                        <button id='newpart' onclick="getNewForm()">Clear Form</button>
+                    </div>
+                    <div id='otherErrors' class="panel-body"></div>
+                    <div id='formBody' class="panel-body">   
+                        <form id='create_user_form' action="{% url 'parts:createpart' %}" method="post">
+                            {% csrf_token %}
+                            <table id='form_contents' class="table">
+                                {{ part_form }}
+                            </table>
+                            <input type="submit" value="Submit">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div id="js_tree_area" class="panel panel-default">
+                    <h1 class="panel-body">Part Tree:</h1>
+                    <div id='search_form_area' class="panel-body">
+                        <form id="search_form" action="{% url 'parts:namesearch' %}" method="post">
+                            {% csrf_token %}
+                            <input type="text" name="tree_search" id="tree_search_box">
+                            <input type="submit" value="Search">
+                        </form>
+                    </div>
+                    <div id="js_tree_box" class="panel-body">
+                    </div>
+                    <p class="panel-body"><button id="delete_part" onclick="">Delete Part</button><button id="remove_child" onclick="">Remove Child Part</button></p>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                
+                <div id="subpartSelect" class="panel panel-default">
+                    <h1 class="panel-body">Child Selection:</h1>
+                    <p class="panel-body"><label for="list_search_box">Search:</label><input type="text" name="list_search" id="list_search_box"></p>
+                    <p class="panel-body"><select name="subpart" id="subPartSelect" size=20></select></p>
+                    <p class="panel-body"><label for="childQuantity">Quantity:</label><input type="number" name="sub_part_quantity" id="childQuantity"><button onclick="addchild()">Add Child</button></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
+</html>

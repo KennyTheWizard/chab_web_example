@@ -1,0 +1,4 @@
+<form id='create_user_form' action="{% url 'parts:createpart' %}" method="post">
+    {% csrf_token %}
+    {{ form }}
+</form>

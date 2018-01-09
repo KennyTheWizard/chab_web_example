@@ -1,0 +1,7 @@
+<form id='edit_user_form' action="{% url 'parts:updatepart' part_id=part_id %}" method="post">
+        {% csrf_token %}
+        <table id='form_contents' class="table">
+                {{ edit_form }}
+        </table>
+        <input type="submit" value="Submit">
+</form>
